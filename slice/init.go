@@ -3,7 +3,7 @@ package main
 
 import "fmt"
 
-// make出来的slice都是该数据类型的默认值
+// make出来的slice每个原色的值都是该数据类型的默认值
 func main() {
 	var a []int               // nil切片，和nil相等，一般用来表示一个不存在的切片
 	var b = []int{}           // 空切片，和nil不相等，一般用来表示一个空的集合
