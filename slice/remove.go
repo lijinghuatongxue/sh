@@ -46,7 +46,7 @@ func main()  {
 
 
 	// copy
-	// :之后主要需要得出的是，剩余后面是几位
+	//
 	//fmt.Println(copy(a[n:],a[n+1:]))
 	a = a[:n+copy(a[n:],a[n+1:])]
 	fmt.Println(a)
