@@ -46,7 +46,6 @@ func main()  {
 
 
 	// copy
-	//
 	//fmt.Println(copy(a[n:],a[n+1:]))
 	a = a[:n+copy(a[n:],a[n+1:])]
 	fmt.Println(a)
