@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 func main()  {
-	a := []int{1,2,3,4,5,6,7,8,9}
+	a := []int{1,2,3,4,5,6,7,8,9,10,11,12,13}
 	// ==================================== remove ====================================
 
 	// 尾部删除,删除最后一个元素
@@ -35,5 +35,19 @@ func main()  {
 	fmt.Println(a)
 	// 头部元素删除，删除开头N个元素
 	a = a[:copy(a,a[n:])]
+	fmt.Println(a)
+
+
+	// append
+	// 删除中间位置下标为n后的这个元素
+	// 下标为N，则N之前的元素作为一个切片追加，:N 可以去除N，N+1 则代表N之后所有
+	a = append(a[:n],a[n+1:]...)
+	fmt.Println(a)
+
+
+	// copy
+	// :之后主要需要得出的是，剩余后面是几位
+	//fmt.Println(copy(a[n:],a[n+1:]))
+	a = a[:n+copy(a[n:],a[n+1:])]
 	fmt.Println(a)
 }
