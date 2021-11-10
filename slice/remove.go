@@ -39,14 +39,22 @@ func main()  {
 
 
 	// append
-	// 删除中间位置下标为n后的这个元素
+	// 删除中间位置下标为n的这个元素
 	// 下标为N，则N之前的元素作为一个切片追加，:N 可以去除N，N+1 则代表N之后所有
 	a = append(a[:n],a[n+1:]...)
 	fmt.Println(a)
 
 
 	// copy
-	//fmt.Println(copy(a[n:],a[n+1:]))
+	//删除中间位置下标为n的这个元素
+	// https://lijinghua-img.oss-cn-beijing.aliyuncs.com/blog/4271636544498_.pic.jpg
+	// 先计算后面的copy，得出结果 copy[[n:],[n+1:]], 和:n 相加
+
 	a = a[:n+copy(a[n:],a[n+1:])]
 	fmt.Println(a)
+
+	// demo
+	//var b = []int{0,1,2,3,4,5}
+	//b = b[:n+copy(b[n:],b[n+1:])]
+	//fmt.Println(b)
 }
