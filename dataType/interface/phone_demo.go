@@ -4,30 +4,31 @@ import (
 	"fmt"
 )
 
-// USB 声明一个USB的接口
-type USB interface {
-	Name() string
-	Connect() // embed Connect方法，去获得fmt能力
+type Phone interface {
+	call()
 }
 
-// PhoneConnecter 声明一个PhoneConnect的结构去实现USB接口
-type PhoneConnecter struct {
-	name string
+type NokiaPhone struct {
 }
 
-func (pc PhoneConnecter) Name() string {
-	fmt.Sprintf("pc name is %s", pc.name)
-	return pc.name
+func (nokiaPhone NokiaPhone) call() {
+	fmt.Println("I am Nokia, I can call you!")
 }
 
-func (pc PhoneConnecter) Connect() {
-	fmt.Println(pc.Name(), "is connected..")
+type IPhone struct {
+}
+
+func (iPhone IPhone) call() {
+	fmt.Println("I am iPhone, I can call you!")
 }
 
 func main() {
-	var a USB                            //声明a的类型是USB类型
-	a = PhoneConnecter{"you's computer"} //成功实现USB接口
-	fmt.Println(a.Name())
-	a.Connect()
+	var phone Phone
+
+	phone = new(NokiaPhone)
+	phone.call()
+
+	phone = new(IPhone)
+	phone.call()
 
 }
