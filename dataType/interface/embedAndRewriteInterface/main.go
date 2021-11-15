@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"sh/v1/dataType/interface/demo1/demo"
+	"sh/v1/dataType/interface/embedAndRewriteInterface/demo"
 )
 
 type T struct {
@@ -11,7 +11,7 @@ type T struct {
 
 func (t *T) Get() {
 	//new(test.Controller).Get()
-	fmt.Print("T")
+	fmt.Print("重写demo中的Get方法")
 }
 
 func (t *T) Post() {
