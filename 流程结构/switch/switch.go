@@ -11,6 +11,7 @@ func main() {
 	switch {
 	case language == "Golang":
 		fmt.Printf("优秀!\n")
+		fallthrough //如需贯通后续的一个case，就添加fallthrough
 	case language == "Python":
 		fmt.Printf("良好\n")
 	case language == "Rust":
@@ -20,5 +21,6 @@ func main() {
 	}
 }
 
-//$ go run switch.go Python
+//$ go run switch.go Golang
+//优秀!
 //良好
