@@ -12,4 +12,12 @@ func main() {
 	NewInitMapDemo["key2"] = "value3"
 	fmt.Println("修改后的变量map | 未改变", NewInitMapDemo)
 	fmt.Println("分配后的原始map | 跟随变量map元素改变", initMapDemo)
+	// map value 比较
+	if NewInitMapDemo["key1"] == initMapDemo["key1"] {
+		fmt.Println("value is Equal")
+	}
+	// map 比较，不能比较
+	//if NewInitMapDemo == initMapDemo{
+	//
+	//}
 }
