@@ -6,7 +6,7 @@ import (
 	"os"
 )
 
-// 获取终端输入的内容,bufio pkg
+// 获取终端输入的内容,buffered I/O pkg
 func main() {
 	fmt.Println("输入：")
 	// 获取input内容
