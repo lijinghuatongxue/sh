@@ -16,3 +16,9 @@ context.Context 是 Go 语言在 1.7 版本中引入标准库的接口1，该接
 2. context.TODO 应该仅在不确定应该使用哪种上下文时使用；
 
 - 在多数情况下，如果当前函数没有上下文作为入参，我们都会使用 context.Background 作为起始的上下文向下传递。
+
+
+## context的取消
+// todo
+
+
