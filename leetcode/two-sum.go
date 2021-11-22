@@ -2,6 +2,21 @@ package main
 
 import "fmt"
 
+// todo hashmap
+//
+
+func twoSumSecond(nums []int, target int) []int {
+	// init a map
+	numMap := map[int]int{}
+	for i, k := range nums {
+		if p, ok := numMap[target-k]; ok {
+			return []int{p, i}
+		}
+		numMap[k] = i
+	}
+	return nil
+}
+
 // https://leetcode-cn.com/problems/two-sum/
 
 // 穷举
@@ -28,4 +43,5 @@ func main() {
 	inputArray := []int{1, 3, 4, 5, 9}
 	var target = 10
 	fmt.Println(twoSum(inputArray, target))
+	fmt.Println(twoSumSecond(inputArray, target))
 }
