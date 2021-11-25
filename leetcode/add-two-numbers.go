@@ -9,13 +9,13 @@ import (
 // https://leetcode-cn.com/problems/add-two-numbers/
 
 func main() {
-	V := [...]int{2, 4, 3, 5, 6, 4}
+	V := [...]int{2, 4, 9, 5, 6, 4, 9}
 	var l1 = new(ListNode)
 	l1.Val = V[0]
 	var l2 = new(ListNode)
 	l2.Val = V[1]
 	var l3 = new(ListNode)
-	l3.Val = 3
+	l3.Val = V[2]
 	l1.Next = l2
 	l2.Next = l3
 	// 第2条链表
@@ -25,12 +25,15 @@ func main() {
 	L2.Val = V[4]
 	var L3 = new(ListNode)
 	L3.Val = V[5]
+	var L4 = new(ListNode)
+	L4.Val = V[6]
 	L1.Next = L2
 	L2.Next = L3
+	L3.Next = L4
 
 	res := addTwoNumbers(l1, L1)
 	fmt.Println(res)
-	Show(res)
+	//Show(res)
 
 }
 
@@ -41,8 +44,8 @@ type ListNode struct {
 
 func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 
-	var i, L, iNum int
-	var l1Len, l2Len int
+	var SumInit, maxLen, iNum int
+	var l1Len, l2Len, compareValue int
 	var L1, L2, tail *ListNode
 	L1 = l1
 	L2 = l2
@@ -58,23 +61,52 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 		l2 = l2.Next //移动指针到下一个链表
 		l2Len++
 	}
-	//fmt.Println("len",l2Len,l1Len)
-
-	for L1 != nil {
-		//fmt.Println(L1.Val,"*",int(math.Pow10(l1Len)))
-		iNum += L1.Val * (int(math.Pow10(l1Len)))
-		L1 = L1.Next //移动指针到下一个链表
-		i++
-		l1Len--
+	// 获取链表长度差值，末尾补 zero value
+	compareValue = int(math.Abs(float64(l2Len - l1Len)))
+	if l1Len > l2Len {
+		for i := 0; i <= compareValue; i++ {
+			var node = ListNode{Val: 0}
+			(tail).Next = &node
+			tail = &node
+		}
+		//tail = l2
+	} else {
+		//tail = l1
+		for i := 0; i <= compareValue; i++ {
+			var node = ListNode{Val: 0}
+			(tail).Next = &node
+			tail = &node
+		}
+		//tail = l1
 	}
-	for L2 != nil {
-		//fmt.Println(L2.Val,"*",int(math.Pow10(l2Len)))
-		iNum += L2.Val * (int(math.Pow10(l2Len)))
-		L2 = L2.Next //移动指针到下一个链表
-		L++
-		l2Len--
+	Show(L1)
+	Show(L2)
+	for i := 0; i < maxLen; i++ {
+		if SumInit == 10 {
+			SumInit = L1.Val + L2.Val + 10
+		} else {
+			SumInit = L1.Val + L2.Val
+		}
+		fmt.Println("当前sum为", SumInit)
+		if SumInit >= 10 {
+			SumInit = 10
+		} else {
+			SumInit = 0
+		}
+		fmt.Printf("(%d + %d)/10 = %d \n", L1.Val, L2.Val, (L1.Val+L2.Val)%10)
+		fmt.Printf("第%d轮value | SumInit ：%d\n", i, SumInit)
+		fmt.Println("当前value", L1.Val)
+		if L1.Next == nil {
+			L1.Next.Val = 0
+			L1.Next.Next = nil
+		}
+		L1 = L1.Next
+		if L2.Next == nil {
+			L2.Next.Val = 0
+			L2.Next.Next = nil
+		}
+		L2 = L2.Next
 	}
-	//fmt.Println("分别求出两个链表携带的val 之和 sum:",iNum/10)
 
 	// 将sum拆开塞入到一个新的链表中
 
