@@ -43,11 +43,12 @@ type ListNode struct {
 
 func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	var l1Len, LastSum, l2Len, compareValue int
-	var L1, L2, tail, EndL1, EndL2, initLinkNode *ListNode
-	L1 = l1
-	EndL1 = L1
-	L2 = l2
-	EndL2 = L2
+	var tail, EndL1, EndL2, initLinkNode *ListNode
+	//L1 = l1
+	//EndL1 = L1
+	//L2 = l2
+	EndL2 = l2
+	EndL1 = l1
 	//tail = ListNode
 	//fmt.Println("tail",tail)
 	//	制造2个数组，追加，and 获取两个链表的长度
@@ -73,15 +74,12 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 			l2Arr = append(l2Arr, 0)
 		}
 		// 倒序
-		// 倒序
 		for i, j := 0, len(l2Arr)-1; i < j; i, j = i+1, j-1 {
 			l2Arr[i], l2Arr[j] = l2Arr[j], l2Arr[i]
 		}
 		// 从数组中抽出元素，追加到新的链表中
 		for _, i := range l2Arr {
 			var node = ListNode{Val: i} // 赋值给 tail 链表
-			//(*tail).Next= &node           //将新插入的node的next指向头结点
-			//tail = &node                   //重新赋值头结点
 			node.Next = tail
 			tail = &node
 		}
@@ -97,19 +95,11 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 		// 从数组中抽出元素，追加到新的链表中
 		for _, i := range l1Arr {
 			var node = ListNode{Val: i} // 赋值给 tail 链表
-			//(*tail).Next= &node           //将新插入的node的next指向头结点
-			//tail = &node                   //重新赋值头结点
 			node.Next = tail
 			tail = &node
 		}
 		EndL1 = tail
 	}
-	//fmt.Println(l1Arr)
-	//fmt.Println(l2Arr)
-	//
-	//Show(EndL1)
-	//Show(EndL2)
-
 	var res []int
 	for i := 0; i < len(l1Arr); i++ {
 		if LastSum >= 10 {
@@ -117,19 +107,14 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 		} else {
 			LastSum = EndL1.Val + EndL2.Val
 		}
-		//if SumInit >= 10 {
-		//	SumInit = 1
-		//} else {
-		//	SumInit = 0
-		//}
 		if LastSum >= 10 {
 			//fmt.Println("当前sum为", LastSum)
 			res = append(res, LastSum-10)
 		} else {
 			//fmt.Println("当前sum为", LastSum)
-			res = append(res, EndL1.Val+EndL2.Val)
+			res = append(res, LastSum)
 		}
-		fmt.Printf(" 第%d轮value | SumInit ：%d |(%d + %d)/10 = %v \n", i, LastSum, EndL1.Val, EndL2.Val, res)
+		//fmt.Printf(" 第%d轮value | SumInit ：%d |(%d + %d)/10 = %v \n", i, LastSum, EndL1.Val, EndL2.Val, res)
 		EndL1 = EndL1.Next
 		EndL2 = EndL2.Next
 		// 判断最后一位，>= 10 ; 补 int 1
@@ -152,9 +137,13 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	//	slice = append(slice, a)
 	//}
 	//fmt.Println(slice)
+	// 倒序
+	for i, j := 0, len(res)-1; i < j; i, j = i+1, j-1 {
+		res[i], res[j] = res[j], res[i]
+	}
 	for _, i := range res {
 		var node = ListNode{Val: i} // 赋值给 tail 链表
-		//(initLinkNode).Next= &node           //将新插入的node的next指向头结点
+		//initLinkNode.Next= &node           //将新插入的node的next指向头结点
 		//initLinkNode = &node                   //重新赋值头结点
 		node.Next = initLinkNode
 		initLinkNode = &node
