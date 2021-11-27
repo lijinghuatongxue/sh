@@ -7,6 +7,9 @@ import (
 )
 
 // https://leetcode-cn.com/problems/add-two-numbers/
+// 1. 将2个链表取长度差值，将长度较短的链表缺失位补zero value，将所有的element追加到数组
+// 2. for 数组，相同index的数组相加，大于10，则-10作为当前index的剩余值，最后需要考虑最后一次相加是否大于10，大于则扩展数组1个长度，最后一个元素为最后一个相加结果-10
+// 3. 数组转链表，return 链表
 
 func main() {
 	V := [...]int{9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9}
