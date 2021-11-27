@@ -8,7 +8,7 @@ import (
 
 // 给定一个字符串 s ，请你找出其中不含有重复字符的 最长子串 的长度。
 // https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/
-
+// todo 滑动窗口
 // ----------------------------------------------------
 //
 //
@@ -62,12 +62,6 @@ func lengthOfLongestSubstring(s string) int {
 		}
 	}
 	fmt.Println(mapRes)
-
-	//for k, _ := range mapRes {
-	//	//fmt.Println(v)
-	//	resArr = append(resArr, k)
-	//}
-	//fmt.Println("最终数组",resArr)
 	for k := range mapRes {
 		resArrInt = append(resArrInt, len(k))
 	}
