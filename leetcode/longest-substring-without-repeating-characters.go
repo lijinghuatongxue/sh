@@ -11,9 +11,8 @@ import (
 // ----------------------------------------------------
 // 复杂解法：
 // 1. 初始化一个map来存储，主要结构是 map[L:1 Li:1 Liu:1 LiuQ:1]，key为子字符串，value随便 int
-// 2. 获取所有子字符串，存取到map之前判断是否当前str已包含，已包含则break
-// 3. 将当前map中的key全部追加到一个array
-// 4. array进行顺序排序，获取最后一个值的length去return
+// 2. 初始化一个resInt int类型，用来存储最大的无重复字符的子字符串的长度
+// 3. return  resInt
 // ----------------------------------------------------
 func main() {
 	res := lengthOfLongestSubstring("LiuQi")
@@ -26,10 +25,12 @@ func lengthOfLongestSubstring(s string) int {
 	for i := 0; i < len(s); i++ {
 		if i == 0 {
 			for i := 0; i < len(s); i++ {
+				// check是否有重复的字符
 				if strings.Contains(res, string(s[i])) {
 					break
 				} else {
 					res += string(s[i])
+					// 如果当前res长度大于临时值(当前最长子字符串)
 					if len(res) > resInt {
 						resInt = len(res)
 					}
@@ -40,10 +41,12 @@ func lengthOfLongestSubstring(s string) int {
 		res := ""
 		if i != 0 && i < len(s) {
 			for _, v := range s[i:] {
+				// check是否有重复的字符
 				if strings.Contains(res, string(v)) {
 					break
 				} else {
 					res += string(v)
+					// 如果当前res长度大于临时值(当前最长子字符串)
 					if len(res) > resInt {
 						resInt = len(res)
 					}
