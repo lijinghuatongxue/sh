@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"sort"
 	"strings"
 )
 
@@ -22,11 +21,8 @@ func main() {
 }
 
 func lengthOfLongestSubstring(s string) int {
-	var resArrInt []int
+	var resInt int
 	var res string
-	// 初始化一个map
-	var mapRes map[string]int
-	mapRes = make(map[string]int)
 	for i := 0; i < len(s); i++ {
 		if i == 0 {
 			for i := 0; i < len(s); i++ {
@@ -34,7 +30,9 @@ func lengthOfLongestSubstring(s string) int {
 					break
 				} else {
 					res += string(s[i])
-					mapRes[res] = 1
+					if len(res) > resInt {
+						resInt = len(res)
+					}
 				}
 
 			}
@@ -46,19 +44,13 @@ func lengthOfLongestSubstring(s string) int {
 					break
 				} else {
 					res += string(v)
-					mapRes[res] = 1
+					if len(res) > resInt {
+						resInt = len(res)
+					}
 				}
 
 			}
 		}
 	}
-	fmt.Println(mapRes)
-	for k := range mapRes {
-		resArrInt = append(resArrInt, len(k))
-	}
-	sort.Ints(resArrInt)
-	if len(resArrInt) != 0 {
-		return resArrInt[len(resArrInt)-1]
-	}
-	return 0
+	return resInt
 }
