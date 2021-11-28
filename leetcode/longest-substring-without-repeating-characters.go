@@ -10,8 +10,11 @@ import (
 // https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/
 // todo 滑动窗口
 // ----------------------------------------------------
-//
-//
+// 复杂解法：
+// 1. 初始化一个map来存储，主要结构是 map[L:1 Li:1 Liu:1 LiuQ:1]，key为子字符串，value随便 int
+// 2. 获取所有子字符串，存取到map之前判断是否当前str已包含，已包含则break
+// 3. 将当前map中的key全部追加到一个array
+// 4. array进行顺序排序，获取最后一个值的length去return
 // ----------------------------------------------------
 func main() {
 	res := lengthOfLongestSubstring("LiuQi")
@@ -24,8 +27,6 @@ func lengthOfLongestSubstring(s string) int {
 	// 初始化一个map
 	var mapRes map[string]int
 	mapRes = make(map[string]int)
-	//
-	var existNum int
 	for i := 0; i < len(s); i++ {
 		if i == 0 {
 			for i := 0; i < len(s); i++ {
@@ -33,12 +34,7 @@ func lengthOfLongestSubstring(s string) int {
 					break
 				} else {
 					res += string(s[i])
-					existNum = mapRes[res]
-					if existNum == 0 {
-						mapRes[res] = 1
-					} else {
-						mapRes[res] = existNum + 1
-					}
+					mapRes[res] = 1
 				}
 
 			}
@@ -50,12 +46,7 @@ func lengthOfLongestSubstring(s string) int {
 					break
 				} else {
 					res += string(v)
-					existNum = mapRes[res]
-					if existNum == 0 {
-						mapRes[res] = 1
-					} else {
-						mapRes[res] = existNum + 1
-					}
+					mapRes[res] = 1
 				}
 
 			}
