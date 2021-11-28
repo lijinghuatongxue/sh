@@ -12,7 +12,8 @@ import (
 // 复杂解法：
 // 1. 初始化一个map来存储，主要结构是 map[L:1 Li:1 Liu:1 LiuQ:1]，key为子字符串，value随便 int
 // 2. 初始化一个resInt int类型，用来存储最大的无重复字符的子字符串的长度
-// 3. return  resInt
+// 3. for 原始字符串，累加一个无重复字符的子字符串，累加过程需要判断是否已存在相同字符
+// 4. return  resInt
 // ----------------------------------------------------
 func main() {
 	res := lengthOfLongestSubstring("LiuQi")
