@@ -5,73 +5,78 @@ import (
 )
 
 func main() {
-	s := "bbbabbba"
+	//    012345678910
+	s := "aaaakaaaajjakajj"
 	res := longestPalindrome(s)
 	logrus.Println(res)
 }
 func longestPalindrome(s string) string {
-	var resMap map[int]int
-	resMap = make(map[int]int)
-	var num, numTwo, numResTwo int
-	logrus.Warnf("len /2 = %d", len(s)%2)
-	//if len(s)%2 == 0 {
-	//	for i := 0; i < len(s)/2; i++ {
-	//		if s[i] == s[len(s)-1-i] {
-	//			numThree++
-	//		} else {
-	//			break
-	//		}
-	//	}
-	//}
-	//logrus.Warn("最长子串不以0开头的字符长度 numThree 为", numThree)
-	//if numThree*2 == len(s) {
-	//	return s
-	//}
-	for i := 0; i < len(s)-1; i++ {
-		if i == 0 {
-			forNum := len(s) - 1
-			for m := 1; m < forNum; m++ {
-				if s[0] == s[m] {
-					num = m
-				} else {
-					break
+	var spaceNum, strNum int
+	var spaceMap map[int]int
+	spaceMap = make(map[int]int)
+	var strMap map[int]int
+	strMap = make(map[int]int)
+	if len(s) == 1 {
+		return s
+	}
+	if len(s) == 0 {
+		return s
+	}
+	//情况1. wuilllqqqi，空格情况作为中间间隔
+	for i := 1; i < len(s); i++ {
+		if i == len(s)-1 {
+			break
+		}
+		forNum := Min(i, len(s)-i-1)
+		for n := 0; n < forNum; n++ {
+			//logrus.Errorf("%d | %d |i -> %d |n -> %d",s[i],s[i+1+n],i,n)
+			if s[i-n] == s[i+1+n] {
+				//logrus.Info(n+1)
+				spaceNum = Max(spaceNum, n+1)
+				if spaceNum > spaceMap[spaceNum] {
+					spaceMap[spaceNum] = i
 				}
 			}
-		} else {
-			// 求出左滑右滑最小次数，避免越界
-			forNum := Min(i, len(s)-i)
-			for n := 1; n < forNum; n++ {
-				if s[i-1] == s[i+1] {
-					logrus.Errorf("%d ｜ %d |n %d ｜i %d", s[i-1], s[i+1], n+1, i)
-					numTwo = n + 1
-					resMap[numTwo] = i
-				}
-			}
-			numResTwo = Max(numTwo, numResTwo)
 		}
 	}
-	logrus.Info("最长子串以0开头的字符长度为", num)
-	logrus.Warn("最长子串不以0开头的字符长度 numTwo 为", numResTwo)
+	//情况2. wuillliqqqi，字符情况作为中间间隔
+	for i := 0; i < len(s); i++ {
+		if i == len(s)-1 {
+			break
+		}
+		forNum := Min(i, len(s)-i)
+		for n := 1; n < forNum; n++ {
+			if s[i-n] == s[i+n] {
+				logrus.Errorf("%d | %d |i -> %d |n -> %d", s[i-n], s[i+n], i, n)
+				if n > strNum {
+					strMap[n] = i
+				}
+				strNum = Max(strNum, n)
+			}
+		}
 
-	//var resArr []string
-	//resArr =strings.Split(s,"")
-	//if num > numTwo{
-	//	return s[:num+1]
-	//}else {
-	//	//return s[map[3]]
-	//}
-	logrus.Info("map", resMap)
-	return "1"
+	}
+	logrus.Warnf("最大value: %d", spaceNum)
+	logrus.Warnf("map strMap: %v", strMap)
+
+	logrus.Warnf("最大value: %d", strNum)
+	logrus.Warnf("map spaceMap: %v", spaceMap)
+
+	if spaceNum > strNum {
+		return s[spaceMap[spaceNum]-spaceNum+1 : spaceMap[spaceNum]+spaceNum+1]
+	} else {
+		return s[strMap[strNum]-strNum+1 : strMap[strNum]+strNum]
+	}
 }
 func Max(a, b int) int {
-	logrus.Warnf("对比a: %d |b: %d", a, b)
+	//logrus.Warnf("对比Max a: %d |b: %d", a, b)
 	if a > b {
 		return a
 	}
 	return b
 }
 func Min(a, b int) int {
-	//logrus.Warnf("对比a: %d |b: %d", a, b)
+	//logrus.Infof("对比Min a: %d |b: %d", a, b)
 	if a > b {
 		return b
 	}
