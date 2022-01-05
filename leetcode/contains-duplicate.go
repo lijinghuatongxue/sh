@@ -9,7 +9,7 @@ import (
 // 先排序，判断除最后一个元素之外的所有元素是否等于后一个元素，排除最后一个元素的原因是，防止数组越界
 func containsDuplicate(nums []int) bool {
 	sort.Ints(nums)
-	for i, _ := range nums {
+	for i := range nums {
 		if i != len(nums)-1 {
 			if nums[i] == nums[i+1] {
 				return true
