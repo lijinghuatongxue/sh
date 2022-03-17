@@ -20,6 +20,7 @@ func longestCommonPrefix(strs []string) string {
 	//fmt.Println(strs)
 	// 以最小长度的0下标的元素，作为循环限制
 	for i := 0; i < len(strs[0]); i++ {
+		// 限制为str的元素个数
 		for j := 1; j < len(strs); j++ {
 			if strs[j][i] != strs[0][i] || i == len(strs[j]) {
 				return strs[0][:i]
