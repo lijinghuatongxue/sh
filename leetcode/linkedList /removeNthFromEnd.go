@@ -1,5 +1,10 @@
 package main
 
+type ListNode struct {
+	Val  int
+	Next *ListNode
+}
+
 func main() {
 	var head = new(ListNode)
 	removeNthFromEnd(head, 1)
