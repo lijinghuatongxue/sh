@@ -18,7 +18,7 @@ func main() {
 	var node1 = new(ListNodeReverseList)
 	node1.Val = 67
 	var node2 = new(ListNodeReverseList)
-	node2.Val = 67233
+	node2.Val = 6723
 	head.Next = node1
 	node1.Next = node2
 	fmt.Printf("原始的 -> \n")
